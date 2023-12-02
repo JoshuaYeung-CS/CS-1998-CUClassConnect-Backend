@@ -1,9 +1,12 @@
 # CS-1998-CUClassConnect-Backend
 App name: CUClassConnect
-Overview:
 
-A web application where users can select courses and enter new lobbies, for discussion (Q&amp;A) and collaboration (meeting up). The application is designed to be run in a Docker container for ease of deployment and consistency across different environments.
+Link to Frontend: https://github.com/jedi244/Cornell-AppDev-Hack-Challenge.git
 
+
+Overview: A web application where users can select courses and enter new lobbies, for discussion (Q&amp;A) and collaboration (meeting up). The application is designed to be run in a Docker container for ease of deployment and consistency across different environments.
+
+![ss of design](https://github.com/JoshuaYeung-CS/CS-1998-CUClassConnect-Backend/assets/147670968/5554ef77-a629-44ac-a5bb-a539cc5e3f19)
 
 **Routes**
 

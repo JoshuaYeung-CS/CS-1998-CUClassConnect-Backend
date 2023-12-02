@@ -5,7 +5,10 @@ A web application where users can select courses and enter new lobbies, for disc
 
 **Features**
 
-Routes
+
+
+**Routes**
+
 - User: Endpoints for registering, logging in, and managing user profiles.
   
 - Course: APIs to add, update, delete, and view courses.

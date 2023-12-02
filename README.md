@@ -17,21 +17,21 @@ Routes
 
 **Database Models**
 
-User: Includes attributes like name, email, password, etc.
+- User: Includes attributes like name, email, password, etc.
 
-Course: Details about courses: title, description, instructor
+- Course: Details about courses: title, description, instructor
 
-Lobby: Information about lobbies: associated course, users.
+- Lobby: Information about lobbies: associated course, users.
 
-Post: Represents user-generated posts in lobbies.
+- Post: Represents user-generated posts in lobbies.
 
-Comment: Related to posts, allowing threaded discussions
+- Comment: Related to posts, allowing threaded discussions
 
 
 **Technical Stack**
 
-Backend Framework: Flask
+- Backend Framework: Flask
 
-Database: SQLAlchemy with SQLite
+- Database: SQLAlchemy with SQLite
 
-Containerization: Docker, Docker Compose
+- Containerization: Docker, Docker Compose

@@ -1,6 +1,8 @@
 # CS-1998-CUClassConnect-Backend
 App name: CUClassConnect
 
+Connect, collaborate, and learn together with CUClassConnect – your interactive hub for educational engagement and peer discussions.
+
 Frontend Repository: https://github.com/jedi244/Cornell-AppDev-Hack-Challenge.git
 
 

@@ -2,7 +2,7 @@ import json
 
 from db import db
 from flask import Flask, request
-from db import User, Lobby, UserLobby, Course, Post, Comment
+from db import User, Lobby, UserLobby, Post, Comment
 
 app = Flask(__name__)
 db_filename = "study.db"
@@ -43,16 +43,16 @@ def create_lobby():
     """
     body = json.loads(request.data)
     if (body.get("description", None) is None or body.get("location", None) is None or
-            body.get("max_people", None) is None or body.get(
-                "course_id", None) is None):
+            body.get("maxMembers", None) is None or body.get(
+                "course", None) is None):
         return failure_response("Not all inputs provided", 400)
 
-    course = Course.query.filter_by(id=body.get("course_id")).first()
+    """course = Course.query.filter_by(id=body.get("course_id")).first()
     if course is None:
-        return failure_response("Course not found")
+        return failure_response("Course not found")"""
 
     new_lobby = Lobby(description=body.get("description"), location=body.get("location"),
-                      max_people=body.get("max_people"), course_id=body.get("course_id"))
+                      maxMembers=body.get("maxMembers"), course=body.get("course"))
     db.session.add(new_lobby)
     db.session.commit()
     return success_response(new_lobby.serialize(), 201)
@@ -149,7 +149,7 @@ def add_user_to_lobby(lobby_id):
     db.session.commit()
     return success_response(lobby.serialize())
 
-
+'''
 @app.route("/api/courses/<int:course_id>/add/", methods=["POST"])
 def add_user_to_course(course_id):
     """
@@ -212,7 +212,7 @@ def get_course(course_id):
         return failure_response("Course not found")
 
     return success_response(course.serialize())
-
+'''
 
 ##################################
 

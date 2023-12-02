@@ -1,14 +1,15 @@
 from flask_sqlalchemy import SQLAlchemy
- 
+
 db = SQLAlchemy()
 
+'''
 association_table = db.Table(
     "association",
     db.Model.metadata,
     db.Column("user_id", db.Integer, db.ForeignKey("users.id")),
     db.Column("course_id", db.Integer, db.ForeignKey("courses.id"))
 )
-
+'''
 
 class User(db.Model):
     """
@@ -18,7 +19,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String, nullable=False)
     # netid = db.Column(db.String, nullable=False)
-    courses = db.relationship("Course", secondary=association_table, back_populates="users")
+    # courses = db.relationship("Course", secondary=association_table, back_populates="users")
     user_lobby = db.relationship("UserLobby", cascade="delete")
     posts = db.relationship("Post", cascade="delete")
     comments = db.relationship("Comment", cascade="delete")
@@ -40,7 +41,7 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             # "netid": self.netid,
-            "courses": [c.simple_serialize() for c in self.courses],
+            # "courses": [c.simple_serialize() for c in self.courses],
             "lobbies": [l.simple_serialize() for l in self.get_lobbies()],
             "posts": [p.simple_serialize() for p in self.posts],
             "comments": [c.simple_serialize() for c in self.comments]
@@ -77,8 +78,9 @@ class Lobby(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     description = db.Column(db.String, nullable=False)
     location = db.Column(db.String, nullable=False)
-    max_people = db.Column(db.Integer, nullable=False)
-    course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), nullable=False)
+    maxMembers = db.Column(db.Integer, nullable=False)
+    course = db.Column(db.String, nullable=False)
+    # course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), nullable=False)
     user_lobby = db.relationship("UserLobby", cascade="delete")
 
     def __init__(self, **kwargs):
@@ -88,8 +90,8 @@ class Lobby(db.Model):
         """
         self.description = kwargs.get("description", "")
         self.location = kwargs.get("location", "")
-        self.max_people = kwargs.get("max_people", -1)
-        self.course_id = kwargs.get("course_id", -1)
+        self.maxMembers = kwargs.get("maxMembers", -1)
+        self.course = kwargs.get("course", "")
 
     def serialize(self):
         """
@@ -101,8 +103,9 @@ class Lobby(db.Model):
             "id": self.id,
             "description": self.description,
             "location": self.location,
-            "max_people": self.max_people,
-            "course": Course.query.filter_by(id=self.course_id).first().simple_serialize(),
+            "maxMembers": self.maxMembers,
+            # "course": Course.query.filter_by(id=self.course_id).first().simple_serialize(),
+            "course": self.course,
             "owner": [o.simple_serialize() for o in self.get_users_by_type("owner")],
             "users": [u.simple_serialize() for u in self.get_users_by_type("user")]
         }
@@ -116,8 +119,9 @@ class Lobby(db.Model):
             "id": self.id,
             "description": self.description,
             "location": self.location,
-            "max_people": self.max_people,
-            "course": Course.query.filter_by(id=self.course_id).first().simple_serialize()
+            "maxMembers": self.maxMembers,
+            # "course": Course.query.filter_by(id=self.course_id).first().simple_serialize()
+            "course": self.course
         }
 
     def get_users_by_type(self, type):
@@ -153,6 +157,7 @@ class UserLobby(db.Model):
         self.user_id = kwargs.get("user_id")
 
 
+'''
 class Course(db.Model):
     """
     Course Model
@@ -195,6 +200,7 @@ class Course(db.Model):
             "code": self.code,
             "name": self.name
         }
+'''
 
 
 class Post(db.Model):
